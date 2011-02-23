@@ -1,0 +1,163 @@
+Bonjour,
+
+ 
+
+Suite à la validation de la cellule de tests, les fichiers suivants sont disponibles :
+
+ 
+
+·         HMK :
+
+VDE_HMK-201103.1.zip (ODS = EBRVDE1110000127)
+
+VCD_HMK-201103.1.zip (ODS = EBRVCD1110000127)
+
+VXP_HMK-201103.1.zip (ODS = EBRVXP1110000127)
+
+ 
+
+·         SqlIte :
+
+db-vcd-201103.3.zip
+
+db-vde-201103.3.zip
+
+db-vxp-201103.3.zip 
+
+ 
+
+·         Mysql :
+
+db-mysql-vxpper-201103.4.zip 
+
+db-mysql-vxl-201103.3.zip
+
+db-mysql-vcd-201103.3.zip
+
+db-mysql-vdej-201103.3.zip
+
+db-mysql-vde-201103.3.zip
+
+db-mysql-vxpj-201103.3.zip
+
+db-mysql-vxp-201103.3.zip  
+
+ 
+
+·         Index Lucene :
+
+ vcd-db-index-201103.1.zip
+
+vde-db-index-201103.1.zip
+
+vxp-db-index-201103.1.zip 
+
+ 
+
+·         Documents :
+
+html-pharma-201003.1.zip
+
+FicheIRIS-201003.1.zip
+
+html-para-201003.1.zip
+
+VDF-201003.1.zip
+
+SUPPRIMES-201003.1.zip
+
+images-201003.1.zip    
+
+ 
+
+RBU-201103.1.zip
+
+PGR-201103.1.zip
+
+BUM-201103.1.zip
+
+FIT-201103.1.zip
+
+ 
+
+ 
+
+·         RCP (pour Rémy) :
+
+\\Srvvidcalcul\transferts\Livraisons\WEB03_2011\RCP-201103.rar
+
+ 
+
+·         Recos :
+
+perceval-recos-201103.1.zip
+
+galaad-recos-201103.1.zip
+
+vidalofficine-2011-03.1.zip
+
+vidalrecos-merlin-2011-03.1.zip
+
+ 
+
+·         Les dates de péremption des données sont:
+
+date d’alerte = 01/09/2011
+
+date de Kill = 01/10/2011
+
+        pour PERCEVAL :
+
+date d’alerte = 17/06/2011
+
+date de Kill = 16/08/2011
+
+ 
+
+·         Widget VDF (pour synchronisation avec le webService des API VIDAL) :
+
+db-mysql-vxpvdf-201103.3.zip
+
+jdbc:mysql://srvvidcalcul:3306/vxpvdf (base « vivante »)
+
+jdbc:mysql://srvvidcalcul:3306/vxpvxp (base VXP complète)
+
+ 
+
+ 
+
+·         Pas de changement pour :
+
+ 
+
+modèle MERLIN
+
+ 
+
+Toxin-201101.1.zip pour VXP
+
+http://tux1.vidal.net/dev/bundles/sitetoxin-1.0.9.zip pour hoptimal
+
+ 
+
+TheraPharma-201010.1.zip
+
+recoDentaire-201101.1.zip
+
+ 
+
+InfosUtiles-NUCLEUS-201102.1.zip
+
+InfosUtiles-201102.1.zip
+
+ 
+
+ 
+
+N’hésitez pas à nous contacter si nécessaire.
+
+ 
+
+Cordialement,
+
+Equipe Production
