@@ -11,30 +11,52 @@ public class Bombarde{
         listOfZipDataFile=new HashMap<String,String>()
     }
 
-    public void load(){
-        File conf=new File(DEFAULT_CONF_DIR+DEFAULT_CONF_FILE)
-        if(!conf.exists()){
-            System.exit(1)
+
+    private File load(String filename){
+
+        File file
+        if(filename!=null && filename!=""){
+
+            file=new File(filename);
+            if(file.exists()){
+                println "Using Conf file :"+file
+                return file
+            }
+            file=new File(DEFAULT_CONF_DIR+filename)
+            if(file.exists()){
+                println "Using Conf file :"+file
+                return file
+            }
         }
+        file=new File(DEFAULT_CONF_DIR+DEFAULT_CONF_FILE)
+        if(file.exists()){
+            println "Using Conf file :"+file
+            return file
+        }
+        System.exit(1)
+
+    }
+
+
+    public void parse(File conf){
 
         conf.eachLine {
             line->
-            String result = line.find(~/(\S{2})*\.zip/) //matches("\w\.zip")
+            //String result = line.find(~/\S*\.zip/) //matches("\w\.zip")
+            String result = line.find(~/[a-zA-Z_1-9\-.].*\.zip/)
             if(result!=null){
                 String left = result.find(~/[^0-9]*/)
                 if(left.startsWith("http:")){
-                    println left
                     left=left.find(~/([^\/]*)$/)
-                    println left
                 }
-                String right = result.find(~/[0-9 _.]*.zip/)
-                listOfZipDataFile.put(left,right.replaceFirst("\\.zip\$",""))
+                left=left.replaceFirst("-\$","")
+                String right = result.find(~/[0-9 -_.]*.zip/)
+                right=right.replaceFirst("\\.zip\$","")
+                right=right.replaceFirst("^-","")
+                listOfZipDataFile.put(left,right)
             }
 
         }
-
-
-
     }
 
 
@@ -42,14 +64,16 @@ public class Bombarde{
     public static void main(String[] args){
         println "Bombarde, a BackOffice Mail Archives Decrypter"
         Bombarde bombarde= new Bombarde()
-        bombarde.load()
+        File conf=bombarde.load(args?args[0]:"")
+        bombarde.parse(conf)
         println bombarde
     }
 
 
 
     public String toString ( ) {
-    return "Bombarde{" +
-    "listOfZipDataFile=" + listOfZipDataFile +
-    '}' ;
+    String toReturn= "Bombarde{"
+     listOfZipDataFile.each{ toReturn+=it.toString()+"\n"}
+    toReturn+='}' ;
+        return toReturn
     }}
