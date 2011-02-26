@@ -62,9 +62,41 @@ public class Bombarde {
 
 
     public static void main(String[] args) {
+
         println "Bombarde, a BackOffice Mail Archives Decrypter"
+        def cli = new CliBuilder(usage: 'groovy bombadge -[hr] [file]')
+        // Create the list of options.
+        cli.with {
+            h longOpt: 'help', 'Show usage information'
+            r longOpt: 'reset-matching', 'reset matching.groovy (a property file matching mail\'s filename and pom\'s nodename)'
+        }
+
+        def options = cli.parse(args)
+        if (!options) {
+            return
+        }
+        // Show usage text when -h or --help option is used.
+        if (options.h) {
+            cli.usage()
+            return
+        }
+
+        if (options.r) {  // Using short option.
+            resetMatchingFile()
+        }
+
+        // Handle all non-option arguments.
+        def confFilename = ''  // Default is empty prefix.
+        def extraArguments = options.arguments()
+        if (extraArguments) {
+            if (extraArguments.size() > 1) {
+                confFilename = extraArguments[1..-1].join(' ')
+            }
+        }
+
+
         Bombarde bombarde = new Bombarde()
-        File conf = bombarde.load(args ? args[0] : "")
+        File conf = bombarde.load(confFilename)
         bombarde.parse(conf)
         println bombarde
 
@@ -81,7 +113,7 @@ public class Bombarde {
     public void resetMatchingFile() {
 
         Properties p = new Properties()
-
+        //TO BE COMPLETED, on file presence on tux1
         p.put("pharma.version", "html-pharma")
         p.put("para.version", "html-para")
         p.put("supprimes.version", "SUPPRIMES")
@@ -119,7 +151,7 @@ public class Bombarde {
 
         def prop = new ConfigSlurper().parse(p)
 
-        File matching=new File(DEFAULT_CONF_DIR + "matching.groovy")
+        File matching = new File(DEFAULT_CONF_DIR + "matching.groovy")
         matching.delete()
         matching.withWriter {writer -> prop.writeTo(writer)}
 
