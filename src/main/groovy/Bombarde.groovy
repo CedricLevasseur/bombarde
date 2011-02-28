@@ -1,7 +1,8 @@
 public class Bombarde {
 
     public static String DEFAULT_CONF_DIR = "src/main/ressources/"
-    public static String DEFAULT_CONF_FILE = "mail.in"
+    public static String DEFAULT_MAIL_FILE = "mail.in"
+    public static String DEFAULT_CONF_FILE = "bombarde.conf"
 
     Map<String, String> listOfZipDataFile
 
@@ -19,28 +20,30 @@ public class Bombarde {
 
             file = new File(filename);
             if (file.exists()) {
-                println "Using Conf file :" + file
+                println "Using mail input file :" + file
                 return file
             }
             file = new File(DEFAULT_CONF_DIR + filename)
             if (file.exists()) {
-                println "Using Conf file :" + file
+                println "Using mail input file :" + file
                 return file
             }
         }
-        file = new File(DEFAULT_CONF_DIR + DEFAULT_CONF_FILE)
+        file = new File(DEFAULT_CONF_DIR + DEFAULT_MAIL_FILE)
         if (file.exists()) {
-            println "Using Conf file :" + file
+            println "Usingmail input file :" + file
             return file
         }
+        println "Mail input file not found"
         System.exit(1)
 
     }
 
 
-    public void parse(File conf) {
 
-        conf.eachLine {
+    public void parse(File input) {
+
+        input.eachLine {
             line ->
             //String result = line.find(~/\S*\.zip/) //matches("\w\.zip")
             String result = line.find(~/[a-zA-Z_1-9\-.].*\.zip/)
@@ -61,9 +64,12 @@ public class Bombarde {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         println "Bombarde, a BackOffice Mail Archives Decrypter"
+
+        Bombarde bombarde = new Bombarde()
+
         def cli = new CliBuilder(usage: 'groovy bombadge -[hr] [file]')
         // Create the list of options.
         cli.with {
@@ -82,22 +88,24 @@ public class Bombarde {
         }
 
         if (options.r) {  // Using short option.
-            resetMatchingFile()
+            bombarde.resetMatchingFile()
         }
 
         // Handle all non-option arguments.
-        def confFilename = ''  // Default is empty prefix.
+        def inputFilename = ''  // Default is empty prefix.
         def extraArguments = options.arguments()
         if (extraArguments) {
             if (extraArguments.size() > 1) {
-                confFilename = extraArguments[1..-1].join(' ')
+                inputFilename = extraArguments[1..-1].join(' ')
             }
         }
 
 
-        Bombarde bombarde = new Bombarde()
-        File conf = bombarde.load(confFilename)
-        bombarde.parse(conf)
+
+        File input = bombarde.load(inputFilename)
+        bombarde.parse(input)
+        Conf conf=new Conf(DEFAULT_CONF_DIR+DEFAULT_CONF_FILE)
+        conf.parse()
         println bombarde
 
     }
@@ -114,41 +122,40 @@ public class Bombarde {
 
         Properties p = new Properties()
         //TO BE COMPLETED, on file presence on tux1
-        p.put("pharma.version", "html-pharma")
-        p.put("para.version", "html-para")
-        p.put("supprimes.version", "SUPPRIMES")
-        p.put("monograph.images.version", "images")
-        p.put("recosDentaires.version", "recoDentaire")
-        p.put("toxin.version", "Toxin")
-        p.put("fit.version", "FIT")
-        p.put("pgr.version", "PGR")
-        p.put("bum.version", "BUM")
-        p.put("rbu.version", "RBU")
-        p.put("useful.info.version", "InfosUtiles")
-        p.put("vidal.vmp.fr.version", "")
-        p.put("iris.version", "FicheIRIS")
-        p.put("vdf.version", "VDF")
-        p.put("vidal.recos.version", "vidalrecos-merlin")
-        p.put("melusine.recos.version", "vidalofficine")
-        p.put("perceval.recos.version", "perceval-recos")
-        p.put("galaad.recos.version", "galaad-recos")
-        p.put("thera.images.version", "CEDRIC")
-        p.put("monos.thera.version", "")
-        p.put("hmk.version", "VDE_HMK")
-        p.put("db.sqlite.vxp.version", "db-vxp")
-        p.put("db.sqlite.vde.version", "db-vde")
-        p.put("db.sqlite.vcd.version", "db-vcd")
-        p.put("db.mysql.vxl.version", "db-mysql-vxl")
-        p.put("db.mysql.vxp.version", "db-mysql-vxp")
-        p.put("db.mysql.vxpper.version", "db-mysql-vxpper")
-        p.put("db.mysql.vxpj.version", "db-mysql-vxpj")
-        p.put("db.mysql.vde.version", "db-mysql-vde")
-        p.put("db.mysql.vdej.version", "db-mysql-vdej")
-        p.put("db.mysql.vcd.version", "db-mysql-vcd")
-        p.put("vcd.index.file.version", "vcd-db-index")
-        p.put("vde.index.file.version", "vde-db-index")
-        p.put("vxp.index.file.version", "vxp-db-index")
-
+        p.put( "html-pharma",["pharma.version"])
+        p.put( "html-para",["para.version"])
+        p.put( "SUPPRIMES",["supprimes.version"])
+        p.put( "images",["monograph.images.version"])
+        p.put( "recoDentaire",["recosDentaires.version","recoDentaire"])
+        p.put( "Toxin",["toxin.version","toxin"])
+        p.put( "FIT",["fit.version","fit"])
+        p.put( "PGR",["pgr.version","pgr"])
+        p.put( "BUM",["bum.version","bum"])
+        p.put( "RBU",["rbu.version","rbu"])
+        p.put( "InfosUtiles",["useful.info.version","useful-info"])
+        p.put( "VMP????",["vidal.vmp.fr.version","vmp"])
+        p.put( "FicheIRIS",["iris.version"])
+        p.put( "VDF",["vdf.version"])
+        p.put( "vidalrecos-merlin",["vidal.recos.version","vidal-recos"])
+        p.put( "vidalofficine",["melusine.recos.version","melusine-recos"])
+        p.put( "perceval-recos",["perceval.recos.version","perceval-recos"])
+        p.put( "galaad-recos",["galaad.recos.version","galaad-recos"])
+        p.put( "THERA????",["thera.images.version","monos-thera"])
+        p.put( "MONOS????",["monos.thera.version","monograph"])
+        p.put( "VDE_HMK",["hmk.version"])
+        p.put( "db-vxp",["db.sqlite.vxp.version","db-vxp"])
+        p.put( "db-vde",["db.sqlite.vde.version","db-vde"])
+        p.put( "db-vcd",["db.sqlite.vcd.version","db-vcd"])
+        p.put( "db-mysql-vxl",["db.mysql.vxl.version","db-mysql-vxl"])
+        p.put( "db-mysql-vxp",["db.mysql.vxp.version","db-mysql-vxp"])
+        p.put( "db-mysql-vxpper",["db.mysql.vxpper.version","db-mysql-vxpper"])
+        p.put( "db-mysql-vxpj",["db.mysql.vxpj.version","db-mysql-vxpj"])
+        p.put( "db-mysql-vde",["db.mysql.vde.version","db-mysql-vde"])
+        p.put( "db-mysql-vdej",["db.mysql.vdej.version","db-mysql-vdej"])
+        p.put( "db-mysql-vcd",["db.mysql.vcd.version","db-mysql-vcd"])
+        p.put( "vcd-db-index",["vcd.index.file.version","index-db-vcd-mysql"])
+        p.put( "vde-db-index",["vde.index.file.version","index-db-vde-mysql"])
+        p.put( "vxp-db-index",["vxp.index.file.version","index-db-vxp-mysql"])
         def prop = new ConfigSlurper().parse(p)
 
         File matching = new File(DEFAULT_CONF_DIR + "matching.groovy")

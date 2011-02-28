@@ -1,42 +1,34 @@
-useful.info.version="InfosUtiles"
-db {
-	sqlite {
-		vde.version="db-vde"
-		vcd.version="db-vcd"
-		vxp.version="db-vxp"
-	}
-	mysql {
-		vxp.version="db-mysql-vxp"
-		vxl.version="db-mysql-vxl"
-		vxpper.version="db-mysql-vxpper"
-		vdej.version="db-mysql-vdej"
-		vde.version="db-mysql-vde"
-		vxpj.version="db-mysql-vxpj"
-		vcd.version="db-mysql-vcd"
-	}
-}
-supprimes.version="SUPPRIMES"
-pharma.version="html-pharma"
-vidal {
-	vmp.fr.version=""
-	recos.version="vidalrecos-merlin"
-}
-galaad.recos.version="galaad-recos"
-vdf.version="VDF"
-iris.version="FicheIRIS"
-vxp.index.file.version="vxp-db-index"
-bum.version="BUM"
-monograph.images.version="images"
-recosDentaires.version="recoDentaire"
-fit.version="FIT"
-vde.index.file.version="vde-db-index"
-thera.images.version="CEDRIC"
-pgr.version="PGR"
-toxin.version="Toxin"
-perceval.recos.version="perceval-recos"
-hmk.version="VDE_HMK"
-melusine.recos.version="vidalofficine"
-vcd.index.file.version="vcd-db-index"
-monos.thera.version=""
-rbu.version="RBU"
-para.version="html-para"
+RBU=["rbu.version", "rbu"]
+MONOS????=["monos.thera.version", "monograph"]
+db-mysql-vxpj=["db.mysql.vxpj.version", "db-mysql-vxpj"]
+FicheIRIS=["iris.version"]
+vde-db-index=["vde.index.file.version", "index-db-vde-mysql"]
+db-vxp=["db.sqlite.vxp.version", "db-vxp"]
+Toxin=["toxin.version", "toxin"]
+db-vcd=["db.sqlite.vcd.version", "db-vcd"]
+VDF=["vdf.version"]
+db-mysql-vdej=["db.mysql.vdej.version", "db-mysql-vdej"]
+VDE_HMK=["hmk.version"]
+THERA????=["thera.images.version", "monos-thera"]
+vxp-db-index=["vxp.index.file.version", "index-db-vxp-mysql"]
+vidalrecos-merlin=["vidal.recos.version", "vidal-recos"]
+html-pharma=["pharma.version"]
+db-mysql-vxpper=["db.mysql.vxpper.version", "db-mysql-vxpper"]
+db-mysql-vxp=["db.mysql.vxp.version", "db-mysql-vxp"]
+galaad-recos=["galaad.recos.version", "galaad-recos"]
+images=["monograph.images.version"]
+db-mysql-vxl=["db.mysql.vxl.version", "db-mysql-vxl"]
+db-mysql-vcd=["db.mysql.vcd.version", "db-mysql-vcd"]
+vcd-db-index=["vcd.index.file.version", "index-db-vcd-mysql"]
+perceval-recos=["perceval.recos.version", "perceval-recos"]
+db-vde=["db.sqlite.vde.version", "db-vde"]
+recoDentaire=["recosDentaires.version", "recoDentaire"]
+vidalofficine=["melusine.recos.version", "melusine-recos"]
+InfosUtiles=["useful.info.version", "useful-info"]
+SUPPRIMES=["supprimes.version"]
+PGR=["pgr.version", "pgr"]
+FIT=["fit.version", "fit"]
+BUM=["bum.version", "bum"]
+db-mysql-vde=["db.mysql.vde.version", "db-mysql-vde"]
+VMP????=["vidal.vmp.fr.version", "vmp"]
+html-para=["para.version"]
