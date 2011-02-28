@@ -17,7 +17,7 @@ public class Pom {
             //pom.text = (pom.text =~ pattern).replace(replacement)
             pom.eachLine { line ->
                 if(line.contains(node)){
-                    line=replaceInLine(line,version)
+                    line=replaceVersionInLine(line,version)
                 }
 
             }
