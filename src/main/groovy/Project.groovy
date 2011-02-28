@@ -13,7 +13,7 @@ class Project {
     public void parse() {
         File file = new File("src/main/ressources/project.xml")
         def parser = new XmlParser()
-        def result = parser.parse(file);
+        def result = parser.parse(file)
 
         version = result.version.text()
         parentVersion = result.parentVersion.text()
