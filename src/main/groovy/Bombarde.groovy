@@ -1,6 +1,6 @@
 public class Bombarde {
 
-    public static String DEFAULT_CONF_DIR = "src/main/ressources/"
+    public static String DEFAULT_CONF_DIR = "src/main/resources/"
     public static String DEFAULT_MAIL_FILE = "mail.in"
     public static String DEFAULT_CONF_FILE = "bombarde.conf"
 
@@ -16,7 +16,7 @@ public class Bombarde {
         matching=new Matching()
         conf=new Conf(DEFAULT_CONF_DIR+DEFAULT_CONF_FILE)
         conf.parse()
-        pom = new Pom(conf.getPomPath())
+        pom = new Pom(new File(conf.getPomPath()))
     }
 
 

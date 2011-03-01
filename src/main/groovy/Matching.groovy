@@ -9,7 +9,8 @@ public class Matching {
   private void load(){
 
     matching = new Properties()
-    File matchingFile = new File(Bombarde.DEFAULT_CONF_DIR + "matching.groovy").withInputStream {
+    File matchingFile = new File(Bombarde.DEFAULT_CONF_DIR + "matching.groovy")
+    matchingFile.withInputStream {
         stream -> matching.load(stream)
     }
 
@@ -63,13 +64,15 @@ public void resetMatchingFile() {
     }
 
     public String getVersion(String zipname){
-        String[] values= matching[zipname]
+        String[] values= (String [])matching[zipname]
         return values[0]?values[0]:null
     }
 
     public String getModule(String zipname){
-        String[] values= matching[zipname]
-        return values[1]?values[1]:null
+        String[] values= (String [])matching[zipname]
+        //return values[1]?values[1]:null
+        return values[1]
+
     }
 
 
