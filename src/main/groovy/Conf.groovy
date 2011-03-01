@@ -2,8 +2,8 @@ import java.text.ParseException
 
 class Conf {
 
-    File conf
-    String pomPath=""
+    private File conf
+    private String pomPath=""
 
     public Conf(String filename) throws FileNotFoundException{
 
@@ -24,6 +24,10 @@ class Conf {
         if(!pom.exists())
             throw new ParseException("ERROR : pom.path is not correct in "+conf.toURL()+" file")
         println "updating $pomPath "
+    }
+
+    public String getPomPath(){
+        return  pomPath
     }
 
 }

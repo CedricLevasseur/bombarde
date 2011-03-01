@@ -11,7 +11,12 @@ public class Pom {
 
         public void enable(String node){}
 
+
+
+
         public void replaceVersionInFile(String node, String version){
+
+
 
             //pattern = "<([a-zA-Z0-0.\-_]*)>(\w)<\/(\w)>"
             //pom.text = (pom.text =~ pattern).replace(replacement)
