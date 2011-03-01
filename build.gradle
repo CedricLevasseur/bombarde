@@ -13,8 +13,11 @@ repositories {
 sourceSets {
     main {
         java {
-            srcDir 'src/main/groovy'
+            srcDir 'src/main/java'
         }
+	groovy {
+            srcDir 'src/main/groovy'
+	}
         resources {
             srcDir 'src/main/resources'
         }
