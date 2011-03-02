@@ -115,6 +115,16 @@ public class Bombarde {
 
     }
 
+    public void replaceVersionsInPom(){
+        listOfZipDataFile.each(){ zip->
+            String module = matching.getVersion(zip)
+            pom.replaceVersionInFile()
+
+        }
+
+    }
+
+
 
     public String toString() {
         String toReturn = "Bombarde{"
