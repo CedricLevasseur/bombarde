@@ -57,6 +57,8 @@ public void resetMatchingFile() {
         def prop = new ConfigSlurper().parse(p)
 
         File matching = new File(Bombarde.DEFAULT_CONF_DIR + "matching.groovy")
+        println "reseting " + Bombarde.DEFAULT_CONF_DIR + "matching.groovy" +" with defaults values"
+
         matching.delete()
         matching.withWriter {writer -> prop.writeTo(writer)}
 
@@ -66,17 +68,21 @@ public void resetMatchingFile() {
     public String getVersion(String zipname){
 
 
-        String[] values= matching[zipname].split(";")
+        String[] values= ((String) matching.get(zipname).replace('"',"").trim()).split(";")
         def version=values[0]
         return version
     }
 
     public String getModule(String zipname){
-        String[] values= matching[zipname].split(";")
+        String[] values= ((String) matching.get(zipname).replace('"',"").trim()).split(";")
         def module=values[1]
         return module
 
     }
 
+    public String toString(){
+
+        return matching.toString()
+    }
 
 }

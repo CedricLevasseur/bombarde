@@ -6,15 +6,19 @@ public class MatchingTest extends GroovyTestCase {
 
         Matching matching = new Matching()
         String version = matching.getVersion("Toxin")
-        println ">>>>"+version
-
         assertNotNull(version)
-
-
-
+        assertEquals("toxin.version",version)
 
     }
 
+    public void testGetModule() {
+
+        Matching matching = new Matching()
+        String module = matching.getModule("InfosUtiles")
+        assertNotNull(module)
+        assertEquals("useful-info",module)
+
+    }
 
 
 }

@@ -124,8 +124,6 @@ public class Bombarde {
 
     }
 
-
-
     public String toString() {
         String toReturn = "Bombarde{"
         listOfZipDataFile.each { toReturn += it.toString() + "\n"}
