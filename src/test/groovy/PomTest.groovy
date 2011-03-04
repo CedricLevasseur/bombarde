@@ -37,11 +37,40 @@ public class PomTest extends GroovyTestCase {
         }
         assertTrue(result)
 
-
-
-
     }
 
+    public void testEnable(){
+        File pomFile=new File("pomTest.xml")
+        Pom pom=new Pom()
+
+        def line = "Allons enfants de la patrie, "
+        String result =pom.enable(line)
+        assertNotNull result
+        assertEquals(line,result)
+
+
+        line = "<!-- Le jour de gloire est arrivé -->"
+        result = pom.enable(line)
+        assertNotNull(line)
+        assertEquals(" Le jour de gloire est arrivé ", result)
+    }
+
+    public void testDisable(){
+        File pomFile=new File("pomTest.xml")
+        Pom pom=new Pom()
+
+        def line = "Allons enfants de la patrie, "
+        String result =pom.disable(line)
+        assertNotNull result
+        //println line.compareTo("<!--Allons enfants de la patrie, -->")
+        assertEquals("<!--Allons enfants de la patrie, -->",result)
+
+
+        line = "<!-- Le jour de gloire est arrivé -->"
+        result = pom.disable(line)
+        assertNotNull(line)
+        assertEquals(line, result)
+    }
 
 
 }

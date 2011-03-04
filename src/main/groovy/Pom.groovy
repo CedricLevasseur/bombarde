@@ -7,16 +7,30 @@ public class Pom {
 
         }
 
-        public void disable(String node){}
+        public String disable(String line){
+            if(line.trim().startsWith("<!--")){
+                //There's no need to comment any more
+                return line
+            }
+            return "<!--"+line+"-->"
 
-        public void enable(String node){}
+
+        }
+
+        public String enable(String line){
+            if(!line.trim().startsWith("<!--")){
+                //There's no need to uncomment
+                return line
+            }
+            return line.replace("<!--","").replace("-->","")
+        }
+
+
 
 
 
 
         public void replaceVersionInFile(String node, String version){
-
-
 
             //pattern = "<([a-zA-Z0-0.\-_]*)>(\w)<\/(\w)>"
             //pom.text = (pom.text =~ pattern).replace(replacement)
@@ -33,8 +47,11 @@ public class Pom {
             int start=line.indexOf('>')
             int end=line.indexOf('<',start)
 
-            return  line.substring(0,start+1) + value + line.substring(end)
+            return  line.substring(0,start+1) + value + line.substring(end) //TODO complete the line if ending with comment
         }
+
+
+        //<
 
 
 }
