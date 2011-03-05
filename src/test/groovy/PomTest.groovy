@@ -1,6 +1,12 @@
 import groovy.util.GroovyTestCase
+import groovy.mock.interceptor.MockFor
 
 public class PomTest extends GroovyTestCase {
+
+
+
+
+
 
     public void testReplaceVersionInLine() {
 
@@ -72,5 +78,38 @@ public class PomTest extends GroovyTestCase {
         assertEquals(line, result)
     }
 
+
+    public void testGetModuleNameFromXml(){
+
+        File pomFile=new File("pomTest.xml")
+
+        Pom pom=new Pom(pomFile)
+
+
+        assertEquals("toxin", pom.getModuleNameFromXml("      <module>./documents/toxin</module>"))
+
+
+    }
+
+    public void testEnableModules(){
+
+        File pomFile=new File("src/test/resources/pomTest.xml")
+
+        Pom pom=new Pom(pomFile)
+
+        List<String> listOfModules=new ArrayList<String>()
+        listOfModules.add("useful-info")
+        listOfModules.add("toxin")
+
+        pom.enableModules(listOfModules)
+
+
+        println  pomFile.text.find(~/<!--.*useful/)
+
+
+        assertTrue(pomFile.text.find(~/<!--.*useful.*module.*/).equals(null))
+        assertTrue(pomFile.text.find(~/<!--.*toxin.*module.*/).equals(null))
+        assertFalse(pomFile.text.find(~/<!--.*bum.*module.*/).equals(null))
+    }
 
 }

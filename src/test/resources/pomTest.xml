@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>com.vidal.merlin.data</groupId>
+      <artifactId>vidal-production-parent</artifactId>
+      <version>1.0.35-SNAPSHOT</version>
+      <relativePath>../../</relativePath>
+   </parent>
+
+   <groupId>com.vidal.merlin.data</groupId>
+   <artifactId>vidal-data-fr-artifacts-parent</artifactId>
+   <name>Merlin Data</name>
+   <packaging>pom</packaging>
+   <version>2.2.15-SNAPSHOT</version>
+
+   <scm>
+      <connection>scm:git:ssh://git@github.com/softwarevidal/production.git</connection>
+      <url>git:ssh://git@github.com/softwarevidal/production.git</url>
+   </scm>
+
+   <build>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-antrun-plugin</artifactId>
+               <version>${maven-antrun-plugin.version}</version>
+               <dependencies>
+                  <dependency>
+                     <groupId>org.apache.ant</groupId>
+                     <artifactId>ant-nodeps</artifactId>
+                     <version>1.7.1</version>
+                     <scope>runtime</scope>
+                  </dependency>
+               </dependencies>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-jar-plugin</artifactId>
+               <version>2.3</version>
+               <configuration>
+                  <archive>
+                     <manifestEntries>
+                        <Production-Timestamp>${build.timestamp}</Production-Timestamp>
+                     </manifestEntries>
+                  </archive>
+               </configuration>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+   </build>
+
+   <modules>
+<!--      <module>./documents/vidal-recos</module>-->
+<!--      <module>./documents/monograph</module>-->
+<!--      <module>./documents/monograph-images</module>-->
+<!--      <module>./documents/monograph-extension</module>-->
+<!--      <module>./documents/melusine-recos</module>-->
+<!--      <module>./documents/monos-thera</module>-->
+<!--      <module>./documents/monos-thera-images</module>-->
+<!--      <module>./documents/rbu</module>-->
+<!--      <module>./documents/bum</module>-->
+<!--      <module>./documents/fit</module>-->
+<!--     <module>./documents/pgr</module>-->
+<!--      <module>./documents/toxin</module>-->
+<!--      <module>./documents/vidal-vmp-fr</module>-->
+
+<!--      <module>./documents/recoDentaire</module>-->
+<!--      <module>./documents/useful-info</module>-->
+<!--      <module>./documents/galaad-recos</module>-->
+<!--      <module>./documents/perceval-recos</module>-->
+
+<!--      <module>./db-mysql-vcd</module>-->
+<!--      <module>./db-mysql-vde</module>-->
+<!--      <module>./db-mysql-vdej</module>-->
+<!--      <module>./db-mysql-vxpper</module>-->
+<!--      <module>./db-mysql-vxpj</module>-->
+<!--      <module>./db-mysql-vxp</module>-->
+<!--      <module>./db-mysql-vxl</module>-->
+
+<!--      <module>./db-vcd</module>-->
+<!--      <module>./db-vde</module>-->
+<!--      <module>./db-vxp</module>-->
+
+      <module>./index-db-vcd-mysql</module>
+      <module>./index-db-vde-mysql</module>
+      <module>./index-db-vxp-mysql</module>
+
+<!--      <module>./merlin-vcd-data</module>-->
+<!--      <module>./merlin-vde-data</module>-->
+<!--      <module>./merlin-vxp-data</module>-->
+
+
+   </modules>
+
+   <properties>
+      <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+
+      <data.directory.url>http://tux1.vidal.net/dev/prod/xml</data.directory.url>
+
+      <merlin.indexer.plugin.version>1.2</merlin.indexer.plugin.version>
+
+      <!-- documents versions -->
+      <pharma.version>201103.1</pharma.version> <!-- html-pharma-${pharma.version}.zip -->
+      <para.version>201103.1</para.version> <!-- html-para-${para.version}.zip -->
+      <supprimes.version>201103.1</supprimes.version> <!-- SUPPRIMES-${supprimes.version}.zip -->
+      <monograph.images.version>201103.1</monograph.images.version> <!-- images-${monograph.images.version}.zip -->
+      <!--<recosDentaires.version>201101.1</recosDentaires.version>--> <!-- recoDentaire-${recosDentaires.version}.zip -->
+      <toxin.version>201101.1</toxin.version> <!-- Toxin-${toxin.version}.zip -->
+      <fit.version>201103.1</fit.version> <!-- FIT-${fit.version}.zip -->
+      <pgr.version>201103.1</pgr.version> <!-- PGR-${pgr.version}.zip -->
+      <bum.version>201103.1</bum.version> <!-- BUM-${bum.version}.zip -->
+      <rbu.version>201103.1</rbu.version> <!-- RBU-${rbu.version}.zip -->
+      <useful.info.version>201102.1</useful.info.version> <!-- InfosUtiles-${useful.info.version}.zip -->
+
+      <vidal.vmp.fr.version>201010.1-beta</vidal.vmp.fr.version> <!-- html-FR-${vidal.vmp.fr.version}.zip -->
+
+      <iris.version>201103.1</iris.version> <!-- FicheIRIS-${iris.version}.zip -->
+      <vdf.version>201103.1</vdf.version> <!-- VDF-${vdf.version}.zip -->
+      <vidal.recos.version>2011-03.1</vidal.recos.version> <!-- vidalrecos-merlin-${vidal.recos.version}.zip -->
+      <melusine.recos.version>2011-03.1</melusine.recos.version> <!-- vidalofficine-${melusine.recos.version}.zip -->
+
+      <perceval.recos.version>201103.1</perceval.recos.version> <!-- perceval-recos-${perceval.recos.version}.zip -->
+      <galaad.recos.version>201103.1</galaad.recos.version> <!-- galaad-recos-${galaad.recos.version}.zip -->
+
+      <thera.images.version>201010.1</thera.images.version> <!-- images-Thera-${thera.images.version}.zip -->
+      <monos.thera.version>201010.1</monos.thera.version> <!-- TheraPharma-${monos.thera.version}.zip -->
+
+      <!-- hmk data versions -->
+      <hmk.version>201103.1</hmk.version> <!-- VXX_HMK-${hmk.version}.zip -->
+
+      <!--db.sqlite-->
+      <db.sqlite.vxp.version>201103.3</db.sqlite.vxp.version> <!-- db-vxp-${db.sqlite.vxp.version}.zip -->
+      <db.sqlite.vde.version>201103.3</db.sqlite.vde.version> <!-- db-vde-${db.sqlite.vde.version}.zip -->
+      <db.sqlite.vcd.version>201103.3</db.sqlite.vcd.version> <!-- db-vcd-${db.sqlite.vcd.version}.zip -->
+
+      <!--db.mysql-->
+      <db.mysql.vxl.version>201103.3</db.mysql.vxl.version> <!-- db-mysql-vxl-${db.mysql.vxl.version}.zip -->
+      <db.mysql.vxp.version>201103.3</db.mysql.vxp.version> <!-- db-mysql-vxp-${db.mysql.vxp.version}.zip -->
+      <db.mysql.vxpper.version>201103.4</db.mysql.vxpper.version> <!-- db-mysql-vxpper-${db.mysql.vxpper.version}.zip -->
+      <db.mysql.vxpj.version>201103.3</db.mysql.vxpj.version> <!-- db-mysql-vxpj-${db.mysql.vxpj.version}.zip -->
+      <db.mysql.vde.version>201103.3</db.mysql.vde.version> <!-- db-mysql-vde-${db.mysql.vde.version}.zip -->
+      <db.mysql.vdej.version>201103.3</db.mysql.vdej.version> <!-- db-mysql-vdej-${db.mysql.vdej.version}.zip -->
+      <db.mysql.vcd.version>201103.3</db.mysql.vcd.version> <!-- db-mysql-vcd-${db.mysql.vcd.version}.zip -->
+      
+      <!-- db.index FR -->
+      <vcd.index.file.version>201103.2</vcd.index.file.version> <!-- vcd-db-index-${vcd.index.file.version}.zip -->
+      <vde.index.file.version>201103.2</vde.index.file.version> <!-- vde-db-index-${vde.index.file.version}.zip -->
+      <vxp.index.file.version>201103.2</vxp.index.file.version> <!-- vxp-db-index-${vxp.index.file.version}.zip -->
+
+      <!-- dependencies versions -->
+      <maven-antrun-plugin.version>1.3</maven-antrun-plugin.version>
+   </properties>
+</project>
+

@@ -1,57 +1,140 @@
 public class Pom {
 
-        File pom
+    public static String START_MARQUEE = "<!-- #### START Generated with BOMBARDE #### -->"
+    public static String END_MARQUEE = "<!-- #### END Generated with BOMBARDE #### -->"
 
-        public Pom(File pom){
-            this.pom=pom
+    File pom
 
+    public Pom(File pom) {
+        this.pom = pom
+
+    }
+
+    public String disable(String line) {
+        if(line.trim().equals(""))
+            return line
+        if (line.trim().startsWith("<!--")) {
+            //There's no need to comment any more
+            return line
         }
+        return "<!--" + line + "-->"
 
-        public String disable(String line){
-            if(line.trim().startsWith("<!--")){
-                //There's no need to comment any more
-                return line
+
+    }
+
+    public String enable(String line) {
+        if(line.trim().equals(""))
+            return line
+        if (!line.trim().startsWith("<!--")) {
+            //There's no need to uncomment
+            return line
+        }
+        return line.replace("<!--", "").replace("-->", "")
+    }
+
+
+
+    public void enableModulesOld(List<String> listOfModules) {
+
+        pom.eachLine { line ->
+            if (line.equals(START_MARQUEE)) {
             }
-            return "<!--"+line+"-->"
-
-
-        }
-
-        public String enable(String line){
-            if(!line.trim().startsWith("<!--")){
-                //There's no need to uncomment
-                return line
+            if (line.equals(END_MARQUEE)) {
             }
-            return line.replace("<!--","").replace("-->","")
+
+            listOfModules.each() {module ->
+                if (line.contains(module + "</module>")) {
+                    println "DING($module) : $line"
+                    line = enable(line)
+                    println line
+                    //listOfModules.remove(module)
+                }
+                disable(line)
+            }
+
         }
 
+    }
 
 
+    public void enableModules(List<String> listOfModules) {
+        StringWriter sw = new StringWriter()
+        FileReader fr = new FileReader(pom)
 
+        println listOfModules
 
+        Boolean canTransform = false
 
-        public void replaceVersionInFile(String node, String version){
+        pom.eachLine  { line ->
+            if (line.contains("<modules>"))
+                canTransform = true
+            if (line.contains("</modules>"))
+                canTransform = false
 
-            //pattern = "<([a-zA-Z0-0.\-_]*)>(\w)<\/(\w)>"
-            //pom.text = (pom.text =~ pattern).replace(replacement)
-            pom.eachLine { line ->
-                if(line.contains(node)){
-                    line=replaceVersionInLine(line,version)
+            if (canTransform) {
+
+                String module=getModuleNameFromXml(line)
+
+                if(module in listOfModules){
+                    line=enable(line)
+
+                }else{
+                    line=disable(line)
                 }
 
+                /*
+
+                listOfModules.each() {  module ->
+
+                    if (line.contains(module + "</module>")) {
+                        println ">>>>>>>"+module
+                        line = enable(line)
+                        println line
+
+                    } else {
+                        line = disable(line)
+                        println("disable:$line")
+
+                    }
+                } */
+            }
+            sw.write(line+"\n")
+
+        }
+        pom.write(sw.toString())
+
+    }
+
+
+    public String getModuleNameFromXml(String xml){
+        return xml.find(~/([^>\/<]*)<\/module>/){matches, firstmatch -> return firstmatch}
+
+    }
+
+
+
+
+    public void replaceVersionInFile(String node, String version) {
+
+        //pattern = "<([a-zA-Z0-0.\-_]*)>(\w)<\/(\w)>"
+        //pom.text = (pom.text =~ pattern).replace(replacement)
+        pom.eachLine { line ->
+            if (line.contains(node)) {
+                line = replaceVersionInLine(line, version)
             }
 
         }
 
-        public String replaceVersionInLine(String line,String value){
-            int start=line.indexOf('>')
-            int end=line.indexOf('<',start)
+    }
 
-            return  line.substring(0,start+1) + value + line.substring(end) //TODO complete the line if ending with comment
-        }
+    public String replaceVersionInLine(String line, String value) {
+        int start = line.indexOf('>')
+        int end = line.indexOf('<', start)
 
+        return line.substring(0, start + 1) + value + line.substring(end) //TODO complete the line if ending with comment
+    }
 
-        //<
+    //<
 
 
 }
