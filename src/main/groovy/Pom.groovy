@@ -34,29 +34,6 @@ public class Pom {
 
 
 
-    public void enableModulesOld(List<String> listOfModules) {
-
-        pom.eachLine { line ->
-            if (line.equals(START_MARQUEE)) {
-            }
-            if (line.equals(END_MARQUEE)) {
-            }
-
-            listOfModules.each() {module ->
-                if (line.contains(module + "</module>")) {
-                    println "DING($module) : $line"
-                    line = enable(line)
-                    println line
-                    //listOfModules.remove(module)
-                }
-                disable(line)
-            }
-
-        }
-
-    }
-
-
     public void enableModules(List<String> listOfModules) {
         StringWriter sw = new StringWriter()
         FileReader fr = new FileReader(pom)
