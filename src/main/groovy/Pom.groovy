@@ -82,21 +82,6 @@ public class Pom {
                     line=disable(line)
                 }
 
-                /*
-
-                listOfModules.each() {  module ->
-
-                    if (line.contains(module + "</module>")) {
-                        println ">>>>>>>"+module
-                        line = enable(line)
-                        println line
-
-                    } else {
-                        line = disable(line)
-                        println("disable:$line")
-
-                    }
-                } */
             }
             sw.write(line+"\n")
 
