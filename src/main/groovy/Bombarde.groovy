@@ -117,7 +117,6 @@ public class Bombarde {
 
         File input = bombarde.load(inputFilename)
         bombarde.parse(input)
-        println bombarde
 
         bombarde.replaceVersionsInPom()
 
@@ -131,10 +130,6 @@ public class Bombarde {
 
     public void replaceVersionsInPom(){
         listOfZipDataFile.each(){ zipName, number->
-            println "$zipName,$number"
-
-            //String versionName = matching.getVersion(zip)
-            //String versionNum
             pom.replaceVersionInFile(zipName,number)
 
         }
