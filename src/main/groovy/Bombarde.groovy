@@ -42,7 +42,7 @@ public class Bombarde {
         }
         file = new File(DEFAULT_CONF_DIR + DEFAULT_MAIL_FILE)
         if (file.exists()) {
-            println "Usingmail input file :" + file
+            println "Using mail input file :" + file
             return file
         }
         println "Mail input file not found"
