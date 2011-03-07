@@ -1,11 +1,4 @@
-/**
- * Created by IntelliJ IDEA.
- * User: vidal
- * Date: 25/02/11
- * Time: 09:05
- * To change this template use File | Settings | File Templates.
- */
-class Project {
+public class Project {
     String version
     String parentVersion
     Map<String, String> properties = new HashMap<String, String>()

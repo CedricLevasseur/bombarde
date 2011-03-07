@@ -3,15 +3,23 @@ import groovy.mock.interceptor.MockFor
 
 public class PomTest extends GroovyTestCase {
 
+    File pomFile
+    Pom pom
 
 
+    public init(){
+        File pomFileTemplate=new File("src/test/resources/pomTest.template.xml")
+        pomFile=new File("src/test/resources/pomTest.xml")
+        pomFile.text=pomFileTemplate.text
+        pom = new Pom(pomFile)
+
+    }
 
 
 
     public void testReplaceVersionInLine() {
 
-        //Pom pom=new Pom(new File("test.xml"))
-        Pom pom=new Pom((File) null)
+        init()
 
         String line = "<db.sqlite.vxp.version>201103.3</db.sqlite.vxp.version>"
         line = pom.replaceVersionInLine(line,"201102.2")
@@ -30,10 +38,9 @@ public class PomTest extends GroovyTestCase {
     //Bof, test dependant of filesystem :(
     public void testReplaceVersionInFile() {
 
-        def result=false
+        init()
 
-        File pomFile=new File("pomTest.xml")
-        Pom pom=new Pom(pomFile)
+        def result=false
 
         pom.replaceVersionInFile("db.sqlite.vxp.version","201103.3")
         pomFile.eachLine { line->
@@ -46,8 +53,9 @@ public class PomTest extends GroovyTestCase {
     }
 
     public void testEnable(){
-        File pomFile=new File("pomTest.xml")
-        Pom pom=new Pom()
+
+
+        init()
 
         def line = "Allons enfants de la patrie, "
         String result =pom.enable(line)
@@ -62,8 +70,8 @@ public class PomTest extends GroovyTestCase {
     }
 
     public void testDisable(){
-        File pomFile=new File("pomTest.xml")
-        Pom pom=new Pom()
+
+        init()
 
         def line = "Allons enfants de la patrie, "
         String result =pom.disable(line)
@@ -81,10 +89,7 @@ public class PomTest extends GroovyTestCase {
 
     public void testGetModuleNameFromXml(){
 
-        File pomFile=new File("pomTest.xml")
-
-        Pom pom=new Pom(pomFile)
-
+        init()
 
         assertEquals("toxin", pom.getModuleNameFromXml("      <module>./documents/toxin</module>"))
 
@@ -93,18 +98,14 @@ public class PomTest extends GroovyTestCase {
 
     public void testEnableModules(){
 
-        File pomFile=new File("src/test/resources/pomTest.xml")
 
-        Pom pom=new Pom(pomFile)
+        init()
 
         List<String> listOfModules=new ArrayList<String>()
         listOfModules.add("useful-info")
         listOfModules.add("toxin")
 
         pom.enableModules(listOfModules)
-
-
-        println  pomFile.text.find(~/<!--.*useful/)
 
 
         assertTrue(pomFile.text.find(~/<!--.*useful.*module.*/).equals(null))

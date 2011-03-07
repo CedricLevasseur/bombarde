@@ -52,7 +52,7 @@
       </pluginManagement>
    </build>
 
-   <modules>
+<!--   <modules>-->
 <!--      <module>./documents/vidal-recos</module>-->
 <!--      <module>./documents/monograph</module>-->
 <!--      <module>./documents/monograph-images</module>-->
@@ -64,11 +64,11 @@
 <!--      <module>./documents/bum</module>-->
 <!--      <module>./documents/fit</module>-->
 <!--     <module>./documents/pgr</module>-->
-<!--      <module>./documents/toxin</module>-->
+      <module>./documents/toxin</module>
 <!--      <module>./documents/vidal-vmp-fr</module>-->
 
 <!--      <module>./documents/recoDentaire</module>-->
-<!--      <module>./documents/useful-info</module>-->
+      <module>./documents/useful-info</module>
 <!--      <module>./documents/galaad-recos</module>-->
 <!--      <module>./documents/perceval-recos</module>-->
 
@@ -84,9 +84,9 @@
 <!--      <module>./db-vde</module>-->
 <!--      <module>./db-vxp</module>-->
 
-      <module>./index-db-vcd-mysql</module>
-      <module>./index-db-vde-mysql</module>
-      <module>./index-db-vxp-mysql</module>
+<!--      <module>./index-db-vcd-mysql</module>-->
+<!--      <module>./index-db-vde-mysql</module>-->
+<!--      <module>./index-db-vxp-mysql</module>-->
 
 <!--      <module>./merlin-vcd-data</module>-->
 <!--      <module>./merlin-vde-data</module>-->

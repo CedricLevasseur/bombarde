@@ -19,7 +19,11 @@ public class Bombarde {
         pom = new Pom(new File(conf.getPomPath()))
     }
 
-
+    /**
+     * Load a file "mail.in"
+     * @param filename
+     * @return a File
+     */
     private File load(String filename) {
 
         File file
@@ -46,8 +50,10 @@ public class Bombarde {
 
     }
 
-
-
+    /**
+     * Parse a Mail.in file : find the filename in .zip and initialize listOfZipDataFile
+     * @param input, a File
+     */
     public void parse(File input) {
 
         input.eachLine {
@@ -113,17 +119,41 @@ public class Bombarde {
         bombarde.parse(input)
         println bombarde
 
+        bombarde.replaceVersionsInPom()
+
+        bombarde.enableModulesInPom()
+
+
     }
 
+
+
+
     public void replaceVersionsInPom(){
-        listOfZipDataFile.each(){ zip->
-            String module = matching.getVersion(zip)
-            pom.replaceVersionInFile()
+        listOfZipDataFile.each(){ zipName, number->
+            println "$zipName,$number"
+
+            //String versionName = matching.getVersion(zip)
+            //String versionNum
+            pom.replaceVersionInFile(zipName,number)
 
         }
 
     }
 
+    public void enableModulesInPom(){
+        List<String> listOfModules = new ArrayList<String>()
+        listOfZipDataFile.keySet().each(){ zip->
+            String mod=matching.getModule(zip)
+            listOfModules.add(mod)
+        }
+        pom.enableModules(listOfModules)
+    }
+
+    /**
+     * printout the list of filename.zip to be threated
+     * @return a String
+     */
     public String toString() {
         String toReturn = "Bombarde{"
         listOfZipDataFile.each { toReturn += it.toString() + "\n"}

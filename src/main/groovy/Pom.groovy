@@ -10,6 +10,11 @@ public class Pom {
 
     }
 
+    /**
+     * Disable a module in pom.xml
+     * @param line
+     * @return line with xml comment tag
+     */
     public String disable(String line) {
         if(line.trim().equals(""))
             return line
@@ -18,10 +23,13 @@ public class Pom {
             return line
         }
         return "<!--" + line + "-->"
-
-
     }
 
+    /**
+     * Enable a module in pom.xml, by removing xml comment tag
+     * @param line
+     * @return line without xml comment tag
+     */
     public String enable(String line) {
         if(line.trim().equals(""))
             return line
@@ -32,13 +40,13 @@ public class Pom {
         return line.replace("<!--", "").replace("-->", "")
     }
 
-
-
+    /**
+     * enable the modules in pom.xml
+     * @param listOfModules to be enabled
+     */
     public void enableModules(List<String> listOfModules) {
         StringWriter sw = new StringWriter()
         FileReader fr = new FileReader(pom)
-
-        println listOfModules
 
         Boolean canTransform = false
 
@@ -67,28 +75,37 @@ public class Pom {
 
     }
 
-
+    /**
+     * return the name of the module
+     * @param xml, a line from pom.xml which should contain the name of a module
+     * @return the name
+     */
     public String getModuleNameFromXml(String xml){
         return xml.find(~/([^>\/<]*)<\/module>/){matches, firstmatch -> return firstmatch}
 
     }
 
+    /**
+     * Ca fait quoi ça déjà ? lol
+     * @deprecated
+     * @param node
+     * @param version
+     */
+    public void replaceVersionInFile(String versionName, String versionNumber) {
 
-
-
-    public void replaceVersionInFile(String node, String version) {
-
-        //pattern = "<([a-zA-Z0-0.\-_]*)>(\w)<\/(\w)>"
-        //pom.text = (pom.text =~ pattern).replace(replacement)
         pom.eachLine { line ->
-            if (line.contains(node)) {
-                line = replaceVersionInLine(line, version)
+            if (line.contains(versionName)) {
+                line = replaceVersionInLine(line, versionNumber)
             }
-
         }
-
     }
 
+    /**
+     * Place a version number in a xml line between '>' and '<'
+     * @param line
+     * @param value to be placed
+     * @return the line
+     */
     public String replaceVersionInLine(String line, String value) {
         int start = line.indexOf('>')
         int end = line.indexOf('<', start)
@@ -96,7 +113,7 @@ public class Pom {
         return line.substring(0, start + 1) + value + line.substring(end) //TODO complete the line if ending with comment
     }
 
-    //<
+
 
 
 }
